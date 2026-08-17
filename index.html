@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>thee unit converter ov doom</title>
+        <link rel="stylesheet" href="style.css" />
+        <script src="script.js" defer></script>
+    </head>
+    <body>
+        <h1>thee unit converter ov doom</h1>
+        <form method="post">
+            <label for="dimension">dimension:</label>
+            <select id="dimension"></select>
+            <div>
+                <input type="number" id="inputVal" placeholder="value" />
+                <select id="fromUnit"></select>
+                <span>to</span>
+                <select id="toUnit"></select>
+            </div>
+            <button id="convert">convert</button>
+        </form>
+        <p id="result"></p>
+    </body>
+</html>
