@@ -71,5 +71,5 @@ func main() {
 	http.HandleFunc("/convert", decodeAndConvert)
 
 	log.Println("listening on :9393")
-	log.Fatal(http.ListenAndServe(":9393", nil))
+	log.Fatal(http.ListenAndServe("0.0.0.0:9393", nil))
 }
