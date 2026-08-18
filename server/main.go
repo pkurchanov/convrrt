@@ -10,7 +10,7 @@ import (
 // TODO:
 // [x] webpage
 // [x] submit form to server
-// [ ] convert value
+// [x] convert value
 // [ ] display value
 
 type Form struct {
@@ -49,7 +49,7 @@ var unitMap = map[string]float64{
 	"washing machines":       0.357,
 }
 
-func decodeJSON(w http.ResponseWriter, r *http.Request) {
+func decodeAndConvert(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
 		return
@@ -60,7 +60,11 @@ func decodeJSON(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "invalid json", http.StatusBadRequest)
 		return
 	}
-	log.Printf("received request: %v %s to %s\n", data.Value, data.From, data.To)
+
+	normalizedFrom := unitMap[data.From]
+	normalizedTo := unitMap[data.To]
+	result := data.Value * normalizedFrom / normalizedTo
+	log.Printf("%g %s is %.6g %s\n", data.Value, data.From, result, data.To)
 }
 
 func main() {
@@ -71,7 +75,7 @@ func main() {
 	fileServer := http.FileServer(http.Dir(clientDir))
 
 	http.Handle("/", fileServer)
-	http.HandleFunc("/convert", decodeJSON)
+	http.HandleFunc("/convert", decodeAndConvert)
 
 	log.Println("listening on :9393")
 	log.Fatal(http.ListenAndServe(":9393", nil))
