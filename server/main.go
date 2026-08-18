@@ -14,10 +14,39 @@ import (
 // [ ] display value
 
 type Form struct {
-	Dimension string `json:"dimension"`
-	Value     int    `json:"value"`
-	From      string `json:"from"`
-	To        string `json:"to"`
+	Dimension string  `json:"dimension"`
+	Value     float64 `json:"value"`
+	From      string  `json:"from"`
+	To        string  `json:"to"`
+}
+
+var unitMap = map[string]float64{
+	// length
+	"meters":          1,
+	"giraffes":        5,
+	"bananas":         0.18,
+	"rice grains":     0.006,
+	"credit cards":    0.05398,
+	"human hairs":     0.000075,
+	"blue whales":     25,
+	"eiffel towers":   330,
+	"lunar distances": 384_400_000,
+	// area
+	"square meters":   1,
+	"football fields": 5350,
+	"soccer pitches":  7140,
+	"rhode islands":   3_144_000_000,
+	"texas areas":     695_662_000_000,
+	// volume
+	"cubic meters":           1,
+	"millibuckets":           0.001,
+	"olympic swimming pools": 2500,
+	"bathtubs":               0.302,
+	"soda cans":              0.000355,
+	"refrigerators":          0.85,
+	"mini fridges":           0.15,
+	"microwaves":             0.074,
+	"washing machines":       0.357,
 }
 
 func decodeJSON(w http.ResponseWriter, r *http.Request) {
@@ -31,7 +60,7 @@ func decodeJSON(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "invalid json", http.StatusBadRequest)
 		return
 	}
-	log.Printf("received request: %d %s to %s\n", data.Value, data.From, data.To)
+	log.Printf("received request: %v %s to %s\n", data.Value, data.From, data.To)
 }
 
 func main() {

@@ -1,7 +1,33 @@
 const unitsByDimension = {
-  length: ["meters", "kilometers", "miles"],
-  area: ["sq. meters", "sq. kilometers", "sq. miles"],
-  volume: ["cu. meters", "cu. kilometers", "cu. miles"],
+  length: [
+    "meters",
+    "giraffes",
+    "bananas",
+    "credit cards",
+    "human hairs",
+    "blue whales",
+    "eiffel towers",
+    "lunar distances",
+    "rice grains",
+  ],
+  area: [
+    "square meters",
+    "football fields",
+    "soccer pitches",
+    "rhode islands",
+    "texas areas",
+  ],
+  volume: [
+    "cubic meters",
+    "millibuckets",
+    "olympic swimming pools",
+    "bathtubs",
+    "soda cans",
+    "refrigerators",
+    "mini fridges",
+    "microwaves",
+    "washing machines",
+  ],
 };
 
 const formElement = document.getElementById("form");
