@@ -8,17 +8,17 @@
     </head>
     <body>
         <h1>thee unit converter ov doom</h1>
-        <form method="post">
+        <form id="form">
             <label for="dimension">dimension:</label>
             <select id="dimension"></select>
             <div>
-                <input type="number" id="inputVal" placeholder="value" />
-                <select id="fromUnit"></select>
+                <input type="number" id="value" placeholder="value" />
+                <select id="from"></select>
                 <span>to</span>
-                <select id="toUnit"></select>
+                <select id="to"></select>
             </div>
             <button id="convert">convert</button>
         </form>
-        <p id="result"></p>
+        <p id="response"></p>
     </body>
 </html>
