@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"maps"
 	"net/http"
+	"os"
 	"path/filepath"
 )
 
@@ -15,30 +17,21 @@ type Form struct {
 	To        string  `json:"to"`
 }
 
-var unitMap = map[string]float64{
-	// length, m
-	"giraffes":        5,
-	"bananas":         0.18,
-	"rice grains":     0.006,
-	"credit cards":    0.05398,
-	"human hairs":     0.000075,
-	"blue whales":     25,
-	"eiffel towers":   330,
-	"lunar distances": 384_400_000,
-	// area, sq. m
-	"football fields": 5350,
-	"soccer pitches":  7140,
-	"rhode islands":   3_144_000_000,
-	"texas areas":     695_662_000_000,
-	// volume, cu. m
-	"millibuckets":           0.001,
-	"olympic swimming pools": 2500,
-	"bathtubs":               0.302,
-	"soda cans":              0.000355,
-	"refrigerators":          0.85,
-	"mini fridges":           0.15,
-	"microwaves":             0.074,
-	"washing machines":       0.357,
+var unitMap = make(map[string]float64)
+
+func loadUnits() error {
+	data, err := os.ReadFile("units.json")
+	if err != nil {
+		return err
+	}
+	var unitsByDimension map[string]map[string]float64
+	if err := json.Unmarshal(data, &unitsByDimension); err != nil {
+		return err
+	}
+	for _, units := range unitsByDimension {
+		maps.Copy(unitMap, units)
+	}
+	return nil
 }
 
 func decodeAndConvert(w http.ResponseWriter, r *http.Request) {
@@ -53,14 +46,26 @@ func decodeAndConvert(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	normalizedFrom := unitMap[data.From]
-	normalizedTo := unitMap[data.To]
-	result := data.Value * normalizedFrom / normalizedTo
+	normalizedFrom, okFrom := unitMap[data.From]
+	normalizedTo, okTo := unitMap[data.To]
+	if !okFrom || !okTo {
+		http.Error(w, "unknown unit", http.StatusBadRequest)
+		return
+	}
 
+	result := data.Value * normalizedFrom / normalizedTo
 	fmt.Fprintf(w, "= %.6g", result)
 }
 
+func serveUnits(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "units.json")
+}
+
 func main() {
+	if err := loadUnits(); err != nil {
+		log.Fatalf("failed to load units: %s", err)
+	}
+
 	clientDir, err := filepath.Abs("../client")
 	if err != nil {
 		log.Fatalf("failed to resolve website assets: %s", err)
@@ -68,6 +73,7 @@ func main() {
 	fileServer := http.FileServer(http.Dir(clientDir))
 
 	http.Handle("/", fileServer)
+	http.HandleFunc("/units", serveUnits)
 	http.HandleFunc("/convert", decodeAndConvert)
 
 	log.Println("listening on :9393")

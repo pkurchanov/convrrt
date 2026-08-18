@@ -1,0 +1,28 @@
+{
+  "length": {
+    "giraffes": 5,
+    "bananas": 0.18,
+    "rice grains": 0.006,
+    "credit cards": 0.05398,
+    "human hairs": 0.000075,
+    "blue whales": 25,
+    "eiffel towers": 330,
+    "lunar distances": 384400000
+  },
+  "area": {
+    "football fields": 5350,
+    "soccer pitches": 7140,
+    "rhode islands": 3144000000,
+    "texas areas": 695662000000
+  },
+  "volume": {
+    "millibuckets": 0.001,
+    "olympic swimming pools": 2500,
+    "bathtubs": 0.302,
+    "soda cans": 0.000355,
+    "refrigerators": 0.85,
+    "mini fridges": 0.15,
+    "microwaves": 0.074,
+    "washing machines": 0.357
+  }
+}

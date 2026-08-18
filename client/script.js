@@ -1,31 +1,15 @@
-const unitsByDimension = {
-  length: [
-    "giraffes",
-    "bananas",
-    "credit cards",
-    "human hairs",
-    "blue whales",
-    "eiffel towers",
-    "lunar distances",
-    "rice grains",
-  ],
-  area: ["football fields", "soccer pitches", "rhode islands", "texas areas"],
-  volume: [
-    "millibuckets",
-    "olympic swimming pools",
-    "bathtubs",
-    "soda cans",
-    "refrigerators",
-    "mini fridges",
-    "microwaves",
-    "washing machines",
-  ],
-};
+let unitsByDimension = {};
 
 const formElement = document.getElementById("form");
 const dimensionSelect = document.getElementById("dimension");
 const fromUnitSelect = document.getElementById("from");
 const toUnitSelect = document.getElementById("to");
+
+async function loadUnits() {
+  const response = await fetch("/units");
+  unitsByDimension = await response.json();
+  populateDimensions();
+}
 
 function populateDimensions() {
   dimensionSelect.innerHTML = "";
@@ -35,35 +19,43 @@ function populateDimensions() {
     option.textContent = dimension;
     dimensionSelect.appendChild(option);
   });
+  populateUnits();
 }
 
 function populateUnits() {
   const selectedDimension = dimensionSelect.value;
-  const units = unitsByDimension[selectedDimension] || [];
+  const units = unitsByDimension[selectedDimension] || {};
+  const unitNames = Object.keys(units);
+
   fromUnitSelect.innerHTML = "";
   toUnitSelect.innerHTML = "";
-  units.forEach((unit) => {
+
+  unitNames.forEach((unit) => {
     const optionFrom = document.createElement("option");
     optionFrom.value = unit;
     optionFrom.textContent = unit;
     fromUnitSelect.appendChild(optionFrom);
+
     const optionTo = document.createElement("option");
     optionTo.value = unit;
     optionTo.textContent = unit;
     toUnitSelect.appendChild(optionTo);
   });
-  if (units.length > 1) toUnitSelect.selectedIndex = 1;
+
+  if (unitNames.length > 1) toUnitSelect.selectedIndex = 1;
 }
 
 dimensionSelect.addEventListener("change", populateUnits);
-populateDimensions();
-populateUnits();
 
-const texts = [
-  "who up convertin they units rn?",
-  "thee unit converter ov... doom!!1!",
+loadUnits();
+
+const splashes = [
+  "who up converting they units rn",
+  "Straight up “convorting it”. and by “it”, haha, well. let’s justr say. My units",
+  "thee unit converter ov thee enlightened ones",
+  "t3h Un1t c0nv3rTr oF d00m!!!!!!!!!!!! lol...",
 ];
-const randomSplash = texts[Math.floor(Math.random() * texts.length)];
+const randomSplash = splashes[Math.floor(Math.random() * splashes.length)];
 document.getElementById("splash").textContent = randomSplash;
 
 formElement.addEventListener("submit", async (event) => {
