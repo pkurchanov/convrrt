@@ -2,16 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"path/filepath"
 )
-
-// TODO:
-// [x] webpage
-// [x] submit form to server
-// [x] convert value
-// [ ] display value
 
 type Form struct {
 	Dimension string  `json:"dimension"`
@@ -64,7 +59,8 @@ func decodeAndConvert(w http.ResponseWriter, r *http.Request) {
 	normalizedFrom := unitMap[data.From]
 	normalizedTo := unitMap[data.To]
 	result := data.Value * normalizedFrom / normalizedTo
-	log.Printf("%g %s is %.6g %s\n", data.Value, data.From, result, data.To)
+
+	fmt.Fprintf(w, "= %.6g", result)
 }
 
 func main() {

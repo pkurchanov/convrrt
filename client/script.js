@@ -84,8 +84,8 @@ formElement.addEventListener("submit", async (event) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ dimension, value: Number(value), from, to }),
     });
-    const result = await response.json();
-    document.getElementById("response").innerText = result.message;
+    const result = await response.text();
+    document.getElementById("response").innerText = result;
   } catch (error) {
     console.error("submission failed:", error);
     document.getElementById("response").innerText = error;
