@@ -16,8 +16,7 @@ type Form struct {
 }
 
 var unitMap = map[string]float64{
-	// length
-	"meters":          1,
+	// length, m
 	"giraffes":        5,
 	"bananas":         0.18,
 	"rice grains":     0.006,
@@ -26,14 +25,12 @@ var unitMap = map[string]float64{
 	"blue whales":     25,
 	"eiffel towers":   330,
 	"lunar distances": 384_400_000,
-	// area
-	"square meters":   1,
+	// area, sq. m
 	"football fields": 5350,
 	"soccer pitches":  7140,
 	"rhode islands":   3_144_000_000,
 	"texas areas":     695_662_000_000,
-	// volume
-	"cubic meters":           1,
+	// volume, cu. m
 	"millibuckets":           0.001,
 	"olympic swimming pools": 2500,
 	"bathtubs":               0.302,

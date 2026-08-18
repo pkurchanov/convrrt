@@ -2,23 +2,41 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>thee unit converter ov doom</title>
+        <title>unit converter</title>
         <link rel="stylesheet" href="style.css" />
         <script src="script.js" defer></script>
     </head>
     <body>
-        <h1>thee unit converter ov doom</h1>
+        <h1 id="splash">top text</h1>
         <form id="form">
-            <label for="dimension">dimension:</label>
-            <select id="dimension"></select>
-            <div>
-                <input type="number" id="value" placeholder="value" />
-                <select id="from"></select>
-                <span>to</span>
-                <select id="to"></select>
+            <div class="field">
+                <label for="dimension">measurement</label>
+                <select id="dimension" required></select>
             </div>
-            <button id="convert">convert</button>
+
+            <div class="field">
+                <label for="value">value</label>
+                <input
+                    type="number"
+                    id="value"
+                    step="any"
+                    required
+                    placeholder="0.00"
+                />
+            </div>
+
+            <div class="field">
+                <label for="from">from</label>
+                <select id="from" required></select>
+            </div>
+
+            <div class="field">
+                <label for="to">to</label>
+                <select id="to" required></select>
+            </div>
+
+            <button type="submit">convert</button>
         </form>
-        <p id="response"></p>
+        <div id="response">= ...</div>
     </body>
 </html>

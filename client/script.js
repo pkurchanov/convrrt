@@ -1,6 +1,5 @@
 const unitsByDimension = {
   length: [
-    "meters",
     "giraffes",
     "bananas",
     "credit cards",
@@ -10,15 +9,8 @@ const unitsByDimension = {
     "lunar distances",
     "rice grains",
   ],
-  area: [
-    "square meters",
-    "football fields",
-    "soccer pitches",
-    "rhode islands",
-    "texas areas",
-  ],
+  area: ["football fields", "soccer pitches", "rhode islands", "texas areas"],
   volume: [
-    "cubic meters",
     "millibuckets",
     "olympic swimming pools",
     "bathtubs",
@@ -48,46 +40,52 @@ function populateDimensions() {
 function populateUnits() {
   const selectedDimension = dimensionSelect.value;
   const units = unitsByDimension[selectedDimension] || [];
-
   fromUnitSelect.innerHTML = "";
   toUnitSelect.innerHTML = "";
-
   units.forEach((unit) => {
     const optionFrom = document.createElement("option");
     optionFrom.value = unit;
     optionFrom.textContent = unit;
     fromUnitSelect.appendChild(optionFrom);
-
     const optionTo = document.createElement("option");
     optionTo.value = unit;
     optionTo.textContent = unit;
     toUnitSelect.appendChild(optionTo);
   });
+  if (units.length > 1) toUnitSelect.selectedIndex = 1;
 }
 
 dimensionSelect.addEventListener("change", populateUnits);
-
 populateDimensions();
 populateUnits();
 
+const texts = [
+  "who up convertin they units rn?",
+  "thee unit converter ov... doom!!1!",
+];
+const randomSplash = texts[Math.floor(Math.random() * texts.length)];
+document.getElementById("splash").textContent = randomSplash;
+
 formElement.addEventListener("submit", async (event) => {
   event.preventDefault();
-
   const dimension = dimensionSelect.value;
   const value = document.getElementById("value").value;
   const from = fromUnitSelect.value;
   const to = toUnitSelect.value;
-
   try {
     const response = await fetch("/convert", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ dimension, value: Number(value), from, to }),
+      body: JSON.stringify({
+        dimension,
+        value: Number(value),
+        from,
+        to,
+      }),
     });
     const result = await response.text();
     document.getElementById("response").innerText = result;
   } catch (error) {
-    console.error("submission failed:", error);
-    document.getElementById("response").innerText = error;
+    document.getElementById("response").innerText = "conversion failed :(";
   }
 });
