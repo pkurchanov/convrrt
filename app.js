@@ -59,9 +59,8 @@ loadUnits();
 const splashes = [
   "who up converting they units rn",
   "she convert on my unit till I guesstimate",
-  "straight up “convorting it”. and by “it”, haha, well. let’s justr say. my units",
-  "all your base unit are belong to us",
-  "what the FUCK is a kilometer!!!!!🦅🦅🦅🦅🔥🔥🔥🔥🔥",
+  "all your unit are convert to us",
+  "what the FUCK is a kilometer!!!!!🦅🦅🦅🦅",
   "t3h Un1t c0nv3rTr oF d00m!!!!!!!! lol...",
 ];
 const randomSplash = splashes[Math.floor(Math.random() * splashes.length)];
