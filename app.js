@@ -6,9 +6,17 @@ const fromUnitSelect = document.getElementById("from");
 const toUnitSelect = document.getElementById("to");
 
 async function loadUnits() {
-  const response = await fetch("/units");
-  unitsByDimension = await response.json();
-  populateDimensions();
+  try {
+    const response = await fetch("./units.json");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    unitsByDimension = await response.json();
+    populateDimensions();
+  } catch (error) {
+    console.error("Error loading units:", error);
+    document.getElementById("response").innerText = "failed to load units :/";
+  }
 }
 
 function populateDimensions() {
@@ -51,33 +59,32 @@ loadUnits();
 
 const splashes = [
   "who up converting they units rn",
-  "Straight up “convorting it”. and by “it”, haha, well. let’s justr say. My units",
-  "thee unit converter ov thee enlightened ones",
-  "t3h Un1t c0nv3rTr oF d00m!!!!!!!!!!!! lol...",
+  "she convert on my unit till I guesstimate",
+  "straight up “convorting it”. and by “it”, haha, well. let’s justr say. my units",
+  "all your base unit are belong to us",
+  "what the FUCK is a kilometer!!!!!🦅🦅🦅🦅🔥🔥🔥🔥🔥",
+  "t3h Un1t c0nv3rTr oF d00m!!!!!!!! lol...",
 ];
 const randomSplash = splashes[Math.floor(Math.random() * splashes.length)];
 document.getElementById("splash").textContent = randomSplash;
 
-formElement.addEventListener("submit", async (event) => {
+formElement.addEventListener("submit", (event) => {
   event.preventDefault();
+
   const dimension = dimensionSelect.value;
-  const value = document.getElementById("value").value;
+  const value = Number(document.getElementById("value").value);
   const from = fromUnitSelect.value;
   const to = toUnitSelect.value;
-  try {
-    const response = await fetch("/convert", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        dimension,
-        value: Number(value),
-        from,
-        to,
-      }),
-    });
-    const result = await response.text();
-    document.getElementById("response").innerText = result;
-  } catch (error) {
+
+  const dimensionUnits = unitsByDimension[dimension];
+  if (!dimensionUnits || !(from in dimensionUnits) || !(to in dimensionUnits)) {
     document.getElementById("response").innerText = "conversion failed :(";
+    return;
   }
+
+  const normalizedFrom = dimensionUnits[from];
+  const normalizedTo = dimensionUnits[to];
+  const result = (value * normalizedFrom) / normalizedTo;
+
+  document.getElementById("response").innerText = "= " + result.toPrecision(6);
 });
