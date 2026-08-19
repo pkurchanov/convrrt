@@ -14,7 +14,6 @@ async function loadUnits() {
     unitsByDimension = await response.json();
     populateDimensions();
   } catch (error) {
-    console.error("Error loading units:", error);
     document.getElementById("response").innerText = "failed to load units :/";
   }
 }
