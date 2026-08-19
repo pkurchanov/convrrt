@@ -1,28 +1,43 @@
 {
   "length": {
     "giraffes": 5,
+    "subway footlongs": 0.2921,
+    "light-nanoseconds": 0.2998,
     "bananas": 0.18,
-    "rice grains": 0.006,
     "credit cards": 0.05398,
-    "human hairs": 0.000075,
+    "rice grains": 0.006,
+    "human hairs": 7.5e-5,
     "blue whales": 25,
     "eiffel towers": 330,
-    "lunar distances": 384400000
+    "devitos": 1.47,
+    "marathons": 42195,
+    "lunar distances": 3.844e8
   },
   "area": {
     "football fields": 5350,
     "soccer pitches": 7140,
-    "rhode islands": 3144000000,
-    "texas areas": 695662000000
+    "vatican cities": 490000,
+    "rhode islands": 3.144e9,
+    "france areas": 6.32702e11,
+    "texas areas": 6.95662e11
   },
   "volume": {
-    "millibuckets": 0.001,
+    "grand canyons": 4.17e12,
+    "empire state buildings": 1040000,
     "olympic swimming pools": 2500,
-    "bathtubs": 0.302,
-    "soda cans": 0.000355,
+    "school buses": 95,
     "refrigerators": 0.85,
+    "washing machines": 0.357,
+    "bathtubs": 0.302,
     "mini fridges": 0.15,
     "microwaves": 0.074,
-    "washing machines": 0.357
+    "pineapples": 0.00265,
+    "millibuckets": 0.001,
+    "soda cans": 0.000355,
+    "gerbils": 1e-4
+  },
+  "time": {
+    "shreks": 5700,
+    "plastic bottles": 1.42006167e10
   }
 }
