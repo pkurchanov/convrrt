@@ -79,6 +79,11 @@ func main() {
 	http.HandleFunc("/units", serveUnits)
 	http.HandleFunc("/convert", decodeAndConvert)
 
-	log.Println("listening on :9393")
-	log.Fatal(http.ListenAndServe("0.0.0.0:9393", nil))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "9393"
+	}
+
+	log.Printf("listening on port %s\n", port)
+	log.Fatal(http.ListenAndServe("0.0.0.0:"+port, nil))
 }
