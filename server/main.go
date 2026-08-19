@@ -17,10 +17,13 @@ type Form struct {
 	To        string  `json:"to"`
 }
 
+var unitsPath = "units.json"
+var clientPath = "client/"
+
 var unitMap = make(map[string]float64)
 
 func loadUnits() error {
-	data, err := os.ReadFile("units.json")
+	data, err := os.ReadFile(unitsPath)
 	if err != nil {
 		return err
 	}
@@ -58,7 +61,7 @@ func decodeAndConvert(w http.ResponseWriter, r *http.Request) {
 }
 
 func serveUnits(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "units.json")
+	http.ServeFile(w, r, unitsPath)
 }
 
 func main() {
@@ -66,7 +69,7 @@ func main() {
 		log.Fatalf("failed to load units: %s", err)
 	}
 
-	clientDir, err := filepath.Abs("../client")
+	clientDir, err := filepath.Abs(clientPath)
 	if err != nil {
 		log.Fatalf("failed to resolve website assets: %s", err)
 	}
