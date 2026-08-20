@@ -1,5 +1,7 @@
 # The ultimate unit converter
 
+<img width="615" height="737" alt="puto el que lee" src="https://github.com/user-attachments/assets/a41c22fd-db73-4f70-af9b-364f1b788644" />
+
 Because americans will use anything but the metric system.
 
 ## Inspiration
