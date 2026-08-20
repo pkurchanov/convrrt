@@ -1,22 +1,60 @@
-let unitsByDimension = {};
+const unitsByDimension = {
+  length: {
+    giraffes: 5,
+    "subway footlongs": 0.2921,
+    "light-nanoseconds": 0.2998,
+    "credit cards": 0.05398,
+    bananas: 0.18,
+    dachshunds: 0.6,
+    "rice grains": 6e-3,
+    "human hairs": 7.5e-5,
+    marathons: 42195,
+    "eiffel towers": 330,
+    "statues of liberty": 93,
+    "empire state buildings": 443.2,
+    devitos: 1.47,
+    wadlows: 2.72,
+  },
+  area: {
+    walmarts: 16630,
+    "football fields": 5350,
+    "soccer pitches": 7140,
+    vaticans: 4.9e5,
+    "rhode islands": 3.144e9,
+    frances: 6.32702e11,
+    texases: 6.95662e11,
+  },
+  volume: {
+    "grand canyons": 4.17e12,
+    refrigerators: 0.85,
+    "mini fridges": 0.15,
+    "olympic swimming pools": 2500,
+    "school buses": 95,
+    "washing machines": 0.357,
+    bathtubs: 0.302,
+    microwaves: 0.074,
+    toasters: 3.5e-3,
+    pineapples: 265e-3,
+    millibuckets: 1e-3,
+    "soda cans": 3.55e-4,
+    "starbucks shorts": 2.37e-4,
+    "starbucks talls": 3.54e-4,
+    "starbucks grandes": 4.73e-4,
+    "starbucks ventis": 5.91e-4,
+    "starbucks trentas": 9.16e-4,
+    gerbils: 1e-4,
+  },
+  time: {
+    shreks: 5700,
+    songs: 195,
+    "decayed plastic bottles": 1.42006167e10,
+  },
+};
 
 const formElement = document.getElementById("form");
 const dimensionSelect = document.getElementById("dimension");
 const fromUnitSelect = document.getElementById("from");
 const toUnitSelect = document.getElementById("to");
-
-async function loadUnits() {
-  try {
-    const response = await fetch("./units.json");
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    unitsByDimension = await response.json();
-    populateDimensions();
-  } catch (error) {
-    document.getElementById("response").innerText = "failed to load units :/";
-  }
-}
 
 function populateDimensions() {
   dimensionSelect.innerHTML = "";
@@ -54,8 +92,6 @@ function populateUnits() {
 
 dimensionSelect.addEventListener("change", populateUnits);
 
-loadUnits();
-
 const splashes = [
   "who up converting they units rn",
   "she convert on my unit till I guesstimate",
@@ -86,3 +122,5 @@ formElement.addEventListener("submit", (event) => {
 
   document.getElementById("response").innerText = "= " + result.toPrecision(6);
 });
+
+populateDimensions();
