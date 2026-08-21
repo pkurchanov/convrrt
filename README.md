@@ -4,6 +4,12 @@
 
 Because americans will use anything but the metric system.
 
+## Usage
+
+As of August 2026, the app should be available at http://siranox4.beget.tech.
+
+If you want to try it out locally, simply clone the repo and open `index.html` in your browser. Latest versions don't require being served over HTTP to work.
+
 ## Inspiration
 
-[This](https://roadmap.sh/projects/unit-converter). Except the structure has been completely flattened for ease of deployment. As of 2026-08-19, the app should be available [here](http://siranox4.beget.tech).
+[This](https://roadmap.sh/projects/unit-converter). Except the structure has been aggressively flattened for ease of deployment.

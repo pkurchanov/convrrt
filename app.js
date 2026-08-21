@@ -137,7 +137,9 @@ formElement.addEventListener("submit", (event) => {
   const normalizedTo = dimensionUnits[to];
   const result = (value * normalizedFrom) / normalizedTo;
 
-  document.getElementById("response").innerText = "= " + result.toPrecision(6);
+  document.getElementById("response").innerText = "= " + result.toLocaleString('en-US', {
+    maximumFractionDigits: 11
+  });
 });
 
 populateDimensions();
